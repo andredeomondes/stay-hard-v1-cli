@@ -181,9 +181,6 @@ O sistema Stay Hard evolui progressivamente:
 | Repo | Descrição |
 |------|-----------|
 | [stay-hard-system](https://github.com/andredeomondes/stay-hard-system) | Roadmap completo (209 dias) |
-| [java-study](https://github.com/andredeomondes/java-study) | Estudos Java |
-| [ds-java-spring-professional](https://github.com/andredeomondes/ds-java-spring-professional) | Curso DevSuperior |
-| [CadastroDeNinjas](https://github.com/andredeomondes/CadastroDeNinjas) | API Spring Boot |
 
 ---
 
