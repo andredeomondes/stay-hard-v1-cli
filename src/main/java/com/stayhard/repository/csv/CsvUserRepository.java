@@ -1,6 +1,6 @@
 package repository.csv;
 
-import domain.entities.User;
+import com.stayhard.domain.entities.User;
 import repository.UserRepository;
 
 import java.io.*;

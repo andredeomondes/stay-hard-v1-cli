@@ -1,13 +1,15 @@
-import controller.HabitController;
-import controller.UserController;
-import repository.HabitRepository;
-import repository.UserRepository;
-import repository.csv.CsvHabitRepository;
-import repository.csv.CsvUserRepository;
-import service.HabitService;
-import service.LevelService;
-import service.UserService;
-import ui.UserMenus;
+package com.stayhard;
+
+import com.stayhard.controller.HabitController;
+import com.stayhard.controller.UserController;
+import com.stayhard.service.HabitService;
+import com.stayhard.service.LevelService;
+import com.stayhard.service.UserService;
+import com.stayhard.ui.UserMenus;
+import com.stayhard.repository.HabitRepository;
+import com.stayhard.repository.UserRepository;
+import com.stayhard.repository.csv.CsvHabitRepository;
+import com.stayhard.repository.csv.CsvUserRepository;
 
 public class StayHardApp {
     public static void main(String[] args) {

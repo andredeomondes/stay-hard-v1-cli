@@ -1,8 +1,8 @@
-package controller;
+package com.controller;
 
-import domain.entities.Habit;
-import domain.enums.Priority;
-import service.HabitService;
+import com.domain.entities.Habit;
+import com.domain.enums.Priority;
+import com.service.HabitService;
 
 import java.util.List;
 

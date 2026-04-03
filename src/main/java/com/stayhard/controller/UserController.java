@@ -1,8 +1,8 @@
-package controller;
+package com.controller;
 
-import domain.entities.User;
-import service.LevelService;
-import service.UserService;
+import com.domain.entities.User;
+import com.service.LevelService;
+import com.service.UserService;
 
 public class UserController {
 

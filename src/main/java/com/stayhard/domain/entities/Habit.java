@@ -1,7 +1,7 @@
-package domain.entities;
+package com.domain.entities;
 
-import domain.enums.Priority;
-import domain.enums.Status;
+import com.domain.enums.Priority;
+import com.domain.enums.Status;
 
 public class Habit {
     private String name;

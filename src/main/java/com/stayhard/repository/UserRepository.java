@@ -1,6 +1,6 @@
 package repository;
 
-import domain.entities.User;
+import com.stayhard.domain.entities.User;
 
 public interface UserRepository {
     User load();

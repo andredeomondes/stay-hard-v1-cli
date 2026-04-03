@@ -1,6 +1,6 @@
 package repository;
 
-import domain.entities.Habit;
+import com.stayhard.domain.entities.Habit;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package ui;
+package com.ui;
 
-import controller.HabitController;
-import controller.UserController;
-import domain.entities.Habit;
-import domain.enums.Priority;
-import domain.utils.ConsoleVisual;
+import com.controller.HabitController;
+import com.controller.UserController;
+import com.domain.entities.Habit;
+import com.domain.enums.Priority;
+import com.domain.utils.ConsoleVisual;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,6 +1,6 @@
-package service;
+package com.service;
 
-import domain.entities.User;
+import com.domain.entities.User;
 import repository.UserRepository;
 
 public class UserService {

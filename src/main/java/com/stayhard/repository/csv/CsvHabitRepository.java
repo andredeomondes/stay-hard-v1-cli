@@ -1,8 +1,8 @@
 package repository.csv;
 
-import domain.entities.Habit;
-import domain.enums.Priority;
-import domain.enums.Status;
+import com.stayhard.domain.entities.Habit;
+import com.stayhard.domain.enums.Priority;
+import com.stayhard.domain.enums.Status;
 import repository.HabitRepository;
 
 import java.io.*;

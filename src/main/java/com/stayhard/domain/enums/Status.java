@@ -1,4 +1,4 @@
-package domain.enums;
+package com.domain.enums;
 
 public enum Status {
     TODO,

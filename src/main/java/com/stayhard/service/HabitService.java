@@ -1,8 +1,8 @@
-package service;
+package com.service;
 
-import domain.entities.Habit;
-import domain.enums.Priority;
-import domain.enums.Status;
+import com.domain.entities.Habit;
+import com.domain.enums.Priority;
+import com.domain.enums.Status;
 import repository.HabitRepository;
 
 import java.util.ArrayList;
