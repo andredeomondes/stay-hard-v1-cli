@@ -1,4 +1,4 @@
-package com.domain.enums;
+package com.stayhard.domain.enums;
 
 public enum Priority {
     LOW,

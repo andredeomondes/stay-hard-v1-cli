@@ -1,4 +1,4 @@
-package com.service;
+package com.stayhard.service;
 
 public class LevelService {
 

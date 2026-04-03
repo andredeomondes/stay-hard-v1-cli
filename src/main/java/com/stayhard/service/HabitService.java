@@ -1,9 +1,9 @@
-package com.service;
+package com.stayhard.service;
 
-import com.domain.entities.Habit;
-import com.domain.enums.Priority;
-import com.domain.enums.Status;
-import repository.HabitRepository;
+import com.stayhard.domain.entities.Habit;
+import com.stayhard.domain.enums.Priority;
+import com.stayhard.domain.enums.Status;
+import com.stayhard.repository.HabitRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;

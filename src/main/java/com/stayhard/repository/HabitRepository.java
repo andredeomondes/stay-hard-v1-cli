@@ -1,4 +1,4 @@
-package repository;
+package com.stayhard.repository;
 
 import com.stayhard.domain.entities.Habit;
 

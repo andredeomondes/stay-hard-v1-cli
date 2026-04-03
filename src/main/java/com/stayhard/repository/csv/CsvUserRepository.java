@@ -1,7 +1,7 @@
-package repository.csv;
+package com.stayhard.repository.csv;
 
 import com.stayhard.domain.entities.User;
-import repository.UserRepository;
+import com.stayhard.repository.UserRepository;
 
 import java.io.*;
 import java.nio.file.Files;

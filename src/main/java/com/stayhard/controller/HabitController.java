@@ -1,8 +1,8 @@
-package com.controller;
+package com.stayhard.controller;
 
-import com.domain.entities.Habit;
-import com.domain.enums.Priority;
-import com.service.HabitService;
+import com.stayhard.domain.entities.Habit;
+import com.stayhard.domain.enums.Priority;
+import com.stayhard.service.HabitService;
 
 import java.util.List;
 

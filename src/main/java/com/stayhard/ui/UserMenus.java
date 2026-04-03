@@ -1,10 +1,10 @@
-package com.ui;
+package com.stayhard.ui;
 
-import com.controller.HabitController;
-import com.controller.UserController;
-import com.domain.entities.Habit;
-import com.domain.enums.Priority;
-import com.domain.utils.ConsoleVisual;
+import com.stayhard.controller.HabitController;
+import com.stayhard.controller.UserController;
+import com.stayhard.domain.entities.Habit;
+import com.stayhard.domain.enums.Priority;
+import com.stayhard.domain.utils.ConsoleVisual;
 
 import java.util.List;
 import java.util.Scanner;

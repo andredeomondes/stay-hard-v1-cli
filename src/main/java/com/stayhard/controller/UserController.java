@@ -1,8 +1,8 @@
-package com.controller;
+package com.stayhard.controller;
 
-import com.domain.entities.User;
-import com.service.LevelService;
-import com.service.UserService;
+import com.stayhard.domain.entities.User;
+import com.stayhard.service.LevelService;
+import com.stayhard.service.UserService;
 
 public class UserController {
 

@@ -1,4 +1,4 @@
-package com.domain.entities;
+package com.stayhard.domain.entities;
 
 public class User {
 

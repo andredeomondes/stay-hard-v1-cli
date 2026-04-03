@@ -1,4 +1,4 @@
-package com.domain.utils;
+package com.stayhard.domain.utils;
 
 import java.util.Scanner;
 

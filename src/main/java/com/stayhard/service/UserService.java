@@ -1,7 +1,7 @@
-package com.service;
+package com.stayhard.service;
 
-import com.domain.entities.User;
-import repository.UserRepository;
+import com.stayhard.domain.entities.User;
+import com.stayhard.repository.UserRepository;
 
 public class UserService {
 

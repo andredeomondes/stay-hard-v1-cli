@@ -1,9 +1,9 @@
-package repository.csv;
+package com.stayhard.repository.csv;
 
 import com.stayhard.domain.entities.Habit;
 import com.stayhard.domain.enums.Priority;
 import com.stayhard.domain.enums.Status;
-import repository.HabitRepository;
+import com.stayhard.repository.HabitRepository;
 
 import java.io.*;
 import java.nio.file.Files;
