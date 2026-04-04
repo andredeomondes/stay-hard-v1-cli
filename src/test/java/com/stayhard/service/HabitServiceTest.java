@@ -94,7 +94,29 @@ class HabitServiceTest {
         Habit result = habitService.complete(1L);
 
         assertEquals(Status.COMPLETED, result.status());
-        assertEquals(1, result.streak());
+        assertEquals(LocalDate.now(), result.lastCompletedDate());
+    }
+
+    @Test
+    void areAllHabitsCompleted_whenAllCompleted_shouldReturnTrue() {
+        List<Habit> habits = List.of(
+            Habit.create("E1", "D1", Priority.HIGH, 1L).withId(1L).markComplete(),
+            Habit.create("E2", "D2", Priority.HIGH, 1L).withId(2L).markComplete()
+        );
+        when(repository.findAll()).thenReturn(habits);
+
+        assertTrue(habitService.areAllHabitsCompleted());
+    }
+
+    @Test
+    void areAllHabitsCompleted_whenNotAllCompleted_shouldReturnFalse() {
+        List<Habit> habits = List.of(
+            Habit.create("E1", "D1", Priority.HIGH, 1L).withId(1L).markComplete(),
+            Habit.create("E2", "D2", Priority.HIGH, 1L).withId(2L)
+        );
+        when(repository.findAll()).thenReturn(habits);
+
+        assertFalse(habitService.areAllHabitsCompleted());
     }
 
     @Test

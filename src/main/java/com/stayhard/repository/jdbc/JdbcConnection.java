@@ -60,6 +60,7 @@ public class JdbcConnection {
                 completed_at TIMESTAMP,
                 deadline TIMESTAMP NOT NULL,
                 streak INTEGER DEFAULT 0,
+                last_completed_date DATE,
                 user_id BIGINT REFERENCES users(id)
             )
             """;
@@ -69,6 +70,11 @@ public class JdbcConnection {
             stmt.execute(createHabitsTable);
             try {
                 stmt.execute("ALTER TABLE habits ADD COLUMN IF NOT EXISTS deadline TIMESTAMP NOT NULL DEFAULT NOW() + INTERVAL '24 hours'");
+            } catch (SQLException e) {
+                // Column might already exist
+            }
+            try {
+                stmt.execute("ALTER TABLE habits ADD COLUMN IF NOT EXISTS last_completed_date DATE");
             } catch (SQLException e) {
                 // Column might already exist
             }

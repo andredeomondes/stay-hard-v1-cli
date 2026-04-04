@@ -100,7 +100,7 @@ class JdbcHabitRepositoryIntegrationTest {
         Habit updated = new Habit(
             habit.id(), "Exercise Updated", "New description",
             Priority.CRITICAL, Status.COMPLETED,
-            habit.createdAt(), null, habit.deadline(), 1, habit.userId()
+            habit.createdAt(), null, habit.deadline(), 1, null, habit.userId()
         );
 
         Habit result = repository.update(updated);

@@ -81,6 +81,7 @@ public class HabitService {
             habit.completedAt(),
             habit.deadline(),
             habit.streak(),
+            habit.lastCompletedDate(),
             habit.userId()
         );
 
@@ -139,5 +140,30 @@ public class HabitService {
         int total = repository.count();
         if (total == 0) return 0.0;
         return (double) getCompletedCount() / total * 100;
+    }
+
+    public void advanceToNextDay() {
+        List<Habit> habits = repository.findAll();
+        int completedCount = (int) habits.stream()
+            .filter(h -> h.status() == Status.COMPLETED)
+            .count();
+        
+        boolean allCompleted = completedCount == habits.size() && !habits.isEmpty();
+        
+        for (Habit habit : habits) {
+            Habit renewed;
+            if (allCompleted && habit.status() == Status.COMPLETED) {
+                renewed = habit.renewForNewDay();
+            } else {
+                renewed = habit.renewWithoutStreakIncrease();
+            }
+            repository.update(renewed);
+        }
+    }
+
+    public boolean areAllHabitsCompleted() {
+        List<Habit> habits = repository.findAll();
+        if (habits.isEmpty()) return false;
+        return habits.stream().allMatch(h -> h.status() == Status.COMPLETED);
     }
 }

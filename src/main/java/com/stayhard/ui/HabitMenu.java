@@ -12,6 +12,7 @@ public class HabitMenu {
     private final InputReader input;
     private Long currentUserId;
     private boolean setupComplete = false;
+    private int currentDay = 1;
 
     public HabitMenu(HabitService habitService) {
         this.habitService = habitService;
@@ -21,6 +22,7 @@ public class HabitMenu {
     public void setCurrentUserId(Long userId) {
         this.currentUserId = userId;
         this.setupComplete = false;
+        this.currentDay = 1;
     }
 
     public void show() {
@@ -62,7 +64,7 @@ public class HabitMenu {
         }
 
         ConsoleVisual.printSuccess("Parabéns! Você definiu seus 4 hábitos.");
-        ConsoleVisual.printInfo("Agora complete-os um por um e mantenha os streaks!");
+        ConsoleVisual.printInfo("Agora complete-os um por um e avance para o próximo dia!");
         setupComplete = true;
     }
 
@@ -71,14 +73,21 @@ public class HabitMenu {
             "Listar hábitos",
             "Completar hábito",
             "Marcar incompleto",
-            "Atualizar hábito",
+            "Avançar dia (+1)",
             "Estatísticas",
             "Voltar ao menu principal"
         };
 
         while (true) {
-            ConsoleVisual.printHeader("HABITS");
+            ConsoleVisual.printHeader("DIA " + currentDay);
             printAllHabits();
+            
+            boolean allCompleted = habitService.areAllHabitsCompleted();
+            if (allCompleted) {
+                System.out.println();
+                ConsoleVisual.printSuccess("✅ Todos completados! Avance para o próximo dia!");
+            }
+            
             System.out.println();
             ConsoleVisual.printMenu(options);
 
@@ -89,7 +98,7 @@ public class HabitMenu {
                     case 1 -> listHabits();
                     case 2 -> completeHabit();
                     case 3 -> markIncomplete();
-                    case 4 -> updateHabit();
+                    case 4 -> advanceDay();
                     case 5 -> showStatistics();
                     case 6 -> { return; }
                 }
@@ -126,7 +135,7 @@ public class HabitMenu {
         String highStreak = habit.streak() >= 3 ? " ⭐" : "";
         String deadlineStatus = habit.getDeadlineStatus();
 
-        System.out.printf("  %s [%s] %-20s %s %s%s%n",
+        System.out.printf("  %s [%s] %-18s %s %s%s%n",
             statusIcon,
             priorityStr.substring(0, 3).toUpperCase(),
             habit.name(),
@@ -136,7 +145,7 @@ public class HabitMenu {
     }
 
     private void listHabits() {
-        ConsoleVisual.printSubHeader("Seus Hábitos");
+        ConsoleVisual.printSubHeader("Seus Hábitos - Dia " + currentDay);
         printAllHabits();
     }
 
@@ -161,7 +170,11 @@ public class HabitMenu {
         Habit selected = habits.get(choice - 1);
         Habit completed = habitService.complete(selected.id());
         ConsoleVisual.printSuccess("✅ Completado: " + completed.name());
-        System.out.println("   Streak: " + completed.streak() + " dias!");
+        
+        if (habitService.areAllHabitsCompleted()) {
+            ConsoleVisual.printSuccess("🎉 Todos os hábitos completados!");
+            ConsoleVisual.printInfo("Use a opção 4 para avançar para o próximo dia!");
+        }
     }
 
     private void markIncomplete() {
@@ -170,7 +183,7 @@ public class HabitMenu {
             : habitService.findAll();
 
         System.out.println();
-        System.out.println("Escolha o hábito para resetar:");
+        System.out.println("Escolha o hábito para desmarcar:");
         for (int i = 0; i < habits.size(); i++) {
             Habit h = habits.get(i);
             System.out.printf("  %d. %s%n", i + 1, h.name());
@@ -181,49 +194,57 @@ public class HabitMenu {
         if (choice == 0) return;
 
         Habit selected = habits.get(choice - 1);
-        Habit incomplete = habitService.incomplete(selected.id());
-        ConsoleVisual.printSuccess("Streak resetado para: " + incomplete.name());
+        habitService.incomplete(selected.id());
+        ConsoleVisual.printSuccess("Marcado como pendente: " + selected.name());
     }
 
-    private void updateHabit() {
+    private void advanceDay() {
         List<Habit> habits = currentUserId != null
             ? habitService.findByUserId(currentUserId)
             : habitService.findAll();
 
+        if (habits.isEmpty()) {
+            ConsoleVisual.printError("Nenhum hábito para avançar.");
+            return;
+        }
+
+        boolean allCompleted = habitService.areAllHabitsCompleted();
+        
         System.out.println();
-        System.out.println("Escolha o hábito para atualizar:");
-        for (int i = 0; i < habits.size(); i++) {
-            System.out.printf("  %d. %s%n", i + 1, habits.get(i).name());
+        ConsoleVisual.printSubHeader("Avançar Dia " + currentDay + " → " + (currentDay + 1));
+        System.out.println();
+        
+        if (allCompleted) {
+            System.out.println("✅ Todos os hábitos foram completados!");
+            System.out.println("🔥 STREAK AUMENTOU!");
+            System.out.println();
+            
+            if (input.readBoolean("Confirmar avanço de dia?")) {
+                habitService.advanceToNextDay();
+                currentDay++;
+                ConsoleVisual.printSuccess("Dia " + currentDay + " iniciado!");
+                printAllHabits();
+            }
+        } else {
+            long completed = habits.stream().filter(h -> h.status() == Status.COMPLETED).count();
+            System.out.println("⚠️ Você ainda tem hábitos pendentes!");
+            System.out.println("Completados: " + completed + "/" + habits.size());
+            System.out.println();
+            System.out.println("Se avançar sem completar todos, STREAK SERÁ RESETADO!");
+            System.out.println();
+            
+            if (input.readBoolean("Avançar mesmo assim?")) {
+                habitService.advanceToNextDay();
+                currentDay++;
+                ConsoleVisual.printError("Streak resetado!");
+                ConsoleVisual.printSuccess("Dia " + currentDay + " iniciado.");
+                printAllHabits();
+            }
         }
-        System.out.println("  0. Voltar");
-
-        int choice = input.readIntInRange("Escolha: ", 0, habits.size());
-        if (choice == 0) return;
-
-        Habit selected = habits.get(choice - 1);
-        System.out.println("Atualizando: " + selected.name());
-
-        String name = input.readLine("Novo nome (Enter para pular): ");
-        String description = input.readLine("Nova descrição (Enter para pular): ");
-        String priorityStr = input.readLine("Nova prioridade (1-4, Enter para pular): ");
-
-        Priority priority = null;
-        if (!priorityStr.isBlank()) {
-            int p = Integer.parseInt(priorityStr);
-            priority = Priority.values()[p - 1];
-        }
-
-        Habit updated = habitService.update(
-            selected.id(),
-            name.isBlank() ? null : name,
-            description.isBlank() ? null : description,
-            priority
-        );
-        ConsoleVisual.printSuccess("Atualizado: " + updated.name());
     }
 
     private void showStatistics() {
-        ConsoleVisual.printSubHeader("Estatísticas");
+        ConsoleVisual.printSubHeader("Estatísticas - Dia " + currentDay);
 
         List<Habit> habits = currentUserId != null
             ? habitService.findByUserId(currentUserId)
@@ -237,6 +258,7 @@ public class HabitMenu {
         int maxStreak = habits.stream().mapToInt(Habit::streak).max().orElse(0);
 
         System.out.println();
+        System.out.println("📅 Dia atual: " + currentDay);
         System.out.println("📊 Resumo do dia:");
         System.out.println("   Total de hábitos: " + total);
         System.out.println("   Completados: " + completed);
@@ -250,7 +272,7 @@ public class HabitMenu {
         ConsoleVisual.printProgressBar(completed, total);
 
         if (completed == total && total > 0) {
-            ConsoleVisual.printSuccess("Parabéns! Você completou todos os hábitos hoje!");
+            ConsoleVisual.printSuccess("🎉 Parabéns! Continue assim!");
         }
     }
 }

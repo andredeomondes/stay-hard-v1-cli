@@ -21,6 +21,7 @@ class HabitTest {
         assertEquals(Status.PENDING, habit.status());
         assertEquals(LocalDate.now(), habit.createdAt());
         assertEquals(0, habit.streak());
+        assertNull(habit.lastCompletedDate());
     }
 
     @Test
@@ -38,14 +39,15 @@ class HabitTest {
     }
 
     @Test
-    void markComplete_shouldUpdateStatusAndIncrementStreak() {
+    void markComplete_shouldUpdateStatusAndSetLastCompletedDate() {
         Habit habit = Habit.create("Exercise", "Daily", Priority.HIGH, 1L);
 
         Habit completed = habit.markComplete();
 
         assertEquals(Status.COMPLETED, completed.status());
         assertNotNull(completed.completedAt());
-        assertEquals(1, completed.streak());
+        assertEquals(LocalDate.now(), completed.lastCompletedDate());
+        assertEquals(0, completed.streak());
     }
 
     @Test
@@ -61,6 +63,28 @@ class HabitTest {
     }
 
     @Test
+    void renewForNewDay_shouldIncrementStreakIfCompleted() {
+        Habit habit = Habit.create("Exercise", "Daily", Priority.HIGH, 1L)
+            .markComplete();
+
+        Habit renewed = habit.renewForNewDay();
+
+        assertEquals(Status.PENDING, renewed.status());
+        assertEquals(1, renewed.streak());
+        assertNull(renewed.lastCompletedDate());
+    }
+
+    @Test
+    void renewForNewDay_shouldResetStreakIfIncomplete() {
+        Habit habit = Habit.create("Exercise", "Daily", Priority.HIGH, 1L);
+
+        Habit renewed = habit.renewForNewDay();
+
+        assertEquals(Status.PENDING, renewed.status());
+        assertEquals(0, renewed.streak());
+    }
+
+    @Test
     void isHighPriority_withHighOrCritical_shouldReturnTrue() {
         Habit high = Habit.create("Exercise", "Daily", Priority.HIGH, 1L);
         Habit critical = Habit.create("Exercise", "Daily", Priority.CRITICAL, 1L);
@@ -73,16 +97,17 @@ class HabitTest {
 
     @Test
     void isStreakActive_withStreak3OrMore_shouldReturnTrue() {
-        Habit active = Habit.create("Exercise", "Daily", Priority.HIGH, 1L)
-            .withId(1L)
-            .markComplete()
-            .markComplete()
-            .markComplete();
-        Habit inactive = Habit.create("Exercise", "Daily", Priority.HIGH, 1L)
-            .withId(1L)
-            .markComplete();
+        Habit active = Habit.create("Exercise", "Daily", Priority.HIGH, 1L);
+        
+        Habit withStreak3 = new Habit(
+            active.id(), active.name(), active.description(),
+            active.priority(), active.status(), active.createdAt(),
+            active.completedAt(), active.deadline(), 3, LocalDate.now(), active.userId()
+        );
 
-        assertTrue(active.isStreakActive());
+        Habit inactive = Habit.create("Exercise", "Daily", Priority.HIGH, 1L);
+
+        assertTrue(withStreak3.isStreakActive());
         assertFalse(inactive.isStreakActive());
     }
 

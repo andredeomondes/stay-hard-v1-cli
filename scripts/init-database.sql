@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS habits (
     completed_at TIMESTAMP,
     deadline TIMESTAMP NOT NULL,
     streak INTEGER DEFAULT 0,
+    last_completed_date DATE,
     user_id BIGINT REFERENCES users(id)
 );
 

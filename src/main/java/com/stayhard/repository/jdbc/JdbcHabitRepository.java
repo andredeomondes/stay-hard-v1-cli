@@ -23,8 +23,8 @@ public class JdbcHabitRepository implements HabitRepository {
     @Override
     public Habit save(Habit habit) {
         String sql = """
-            INSERT INTO habits (name, description, priority, status, created_at, completed_at, deadline, streak, user_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO habits (name, description, priority, status, created_at, completed_at, deadline, streak, last_completed_date, user_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         try (Connection conn = jdbcConnection.getConnection();
@@ -38,7 +38,8 @@ public class JdbcHabitRepository implements HabitRepository {
             stmt.setTimestamp(6, habit.completedAt() != null ? Timestamp.valueOf(habit.completedAt()) : null);
             stmt.setTimestamp(7, Timestamp.valueOf(habit.deadline()));
             stmt.setInt(8, habit.streak());
-            stmt.setObject(9, habit.userId());
+            stmt.setDate(9, habit.lastCompletedDate() != null ? Date.valueOf(habit.lastCompletedDate()) : null);
+            stmt.setObject(10, habit.userId());
 
             stmt.executeUpdate();
 
@@ -117,7 +118,7 @@ public class JdbcHabitRepository implements HabitRepository {
         String sql = """
             UPDATE habits
             SET name = ?, description = ?, priority = ?, status = ?,
-                completed_at = ?, deadline = ?, streak = ?, user_id = ?
+                completed_at = ?, deadline = ?, streak = ?, last_completed_date = ?, user_id = ?
             WHERE id = ?
             """;
 
@@ -131,8 +132,9 @@ public class JdbcHabitRepository implements HabitRepository {
             stmt.setTimestamp(5, habit.completedAt() != null ? Timestamp.valueOf(habit.completedAt()) : null);
             stmt.setTimestamp(6, Timestamp.valueOf(habit.deadline()));
             stmt.setInt(7, habit.streak());
-            stmt.setObject(8, habit.userId());
-            stmt.setLong(9, habit.id());
+            stmt.setDate(8, habit.lastCompletedDate() != null ? Date.valueOf(habit.lastCompletedDate()) : null);
+            stmt.setObject(9, habit.userId());
+            stmt.setLong(10, habit.id());
 
             int rows = stmt.executeUpdate();
             if (rows == 0) {
@@ -176,6 +178,16 @@ public class JdbcHabitRepository implements HabitRepository {
     }
 
     private Habit mapResultSetToHabit(ResultSet rs) throws SQLException {
+        LocalDate lastCompletedDate = null;
+        try {
+            Date date = rs.getDate("last_completed_date");
+            if (date != null) {
+                lastCompletedDate = date.toLocalDate();
+            }
+        } catch (SQLException e) {
+            // Column might not exist in older databases
+        }
+        
         return new Habit(
             rs.getLong("id"),
             rs.getString("name"),
@@ -186,6 +198,7 @@ public class JdbcHabitRepository implements HabitRepository {
             rs.getTimestamp("completed_at") != null ? rs.getTimestamp("completed_at").toLocalDateTime() : null,
             rs.getTimestamp("deadline").toLocalDateTime(),
             rs.getInt("streak"),
+            lastCompletedDate,
             rs.getObject("user_id", Long.class)
         );
     }

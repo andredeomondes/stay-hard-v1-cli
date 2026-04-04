@@ -18,6 +18,7 @@ public record Habit(
     LocalDateTime completedAt,
     LocalDateTime deadline,
     int streak,
+    LocalDate lastCompletedDate,
     Long userId
 ) {
     public Habit {
@@ -41,24 +42,49 @@ public record Habit(
             null,
             now.plusHours(24),
             0,
+            null,
             userId
         );
     }
 
     public Habit withId(Long id) {
-        return new Habit(id, name, description, priority, status, createdAt, completedAt, deadline, streak, userId);
+        return new Habit(id, name, description, priority, status, createdAt, completedAt, deadline, streak, lastCompletedDate, userId);
     }
 
     public Habit markComplete() {
-        return new Habit(id, name, description, priority, Status.COMPLETED, createdAt, LocalDateTime.now(), deadline, streak + 1, userId);
+        return new Habit(
+            id, name, description, priority, Status.COMPLETED, createdAt, 
+            LocalDateTime.now(), deadline, streak, LocalDate.now(), userId
+        );
+    }
+
+    public Habit renewForNewDay() {
+        LocalDateTime now = LocalDateTime.now();
+        int newStreak = streak;
+        
+        if (status == Status.COMPLETED && lastCompletedDate != null) {
+            newStreak = streak + 1;
+        }
+        
+        return new Habit(
+            id, name, description, priority, Status.PENDING, createdAt,
+            null, now.plusHours(24), newStreak, null, userId
+        );
     }
 
     public Habit markIncomplete() {
-        return new Habit(id, name, description, priority, Status.PENDING, createdAt, null, deadline, 0, userId);
+        return new Habit(
+            id, name, description, priority, Status.PENDING, createdAt,
+            null, deadline, 0, null, userId
+        );
     }
 
-    public Habit renewDeadline() {
-        return new Habit(id, name, description, priority, status, createdAt, completedAt, LocalDateTime.now().plusHours(24), streak, userId);
+    public Habit renewWithoutStreakIncrease() {
+        LocalDateTime now = LocalDateTime.now();
+        return new Habit(
+            id, name, description, priority, Status.PENDING, createdAt,
+            null, now.plusHours(24), 0, null, userId
+        );
     }
 
     public Habit updateStatus(Status newStatus) {
@@ -67,11 +93,12 @@ public record Habit(
         }
         return new Habit(id, name, description, priority, newStatus, createdAt, 
             newStatus == Status.COMPLETED ? LocalDateTime.now() : completedAt, deadline,
-            newStatus == Status.COMPLETED ? streak + 1 : streak, userId);
+            newStatus == Status.COMPLETED ? streak : streak, 
+            newStatus == Status.COMPLETED ? LocalDate.now() : lastCompletedDate, userId);
     }
 
     public Habit updatePriority(Priority newPriority) {
-        return new Habit(id, name, description, newPriority, status, createdAt, completedAt, deadline, streak, userId);
+        return new Habit(id, name, description, newPriority, status, createdAt, completedAt, deadline, streak, lastCompletedDate, userId);
     }
 
     public boolean isHighPriority() {
@@ -92,9 +119,9 @@ public record Habit(
     }
 
     public String getDeadlineStatus() {
-        if (status == Status.COMPLETED) return "COMPLETO";
+        if (status == Status.COMPLETED) return "✅";
         long hours = getHoursRemaining();
-        if (hours <= 0) return "⏰ ATRASADO!";
+        if (hours <= 0) return "⏰ ATRASADO";
         if (hours <= 2) return "⚠️ " + hours + "h";
         if (hours <= 6) return "🕐 " + hours + "h";
         return "⏱️ " + hours + "h";
