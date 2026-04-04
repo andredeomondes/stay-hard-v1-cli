@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.stayhard.service.HabitServiceTest" time="0.886" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.stayhard.service.HabitServiceTest" time="0.942" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -9,14 +9,14 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
-    <property name="mvnd.terminalWidth" value="120"/>
+    <property name="mvnd.terminalWidth" value="228"/>
     <property name="user.timezone" value="America/Sao_Paulo"/>
     <property name="os.name" value="Windows 11"/>
     <property name="java.vm.specification.version" value="21"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="BR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin"/>
-    <property name="sun.java.command" value="C:\Users\Pichau\AppData\Local\Temp\surefire8266088050328256466\surefirebooter-20260404023553197_35.jar C:\Users\Pichau\AppData\Local\Temp\surefire8266088050328256466 2026-04-04T01-25-41_009-jvmRun1 surefire-20260404023553197_33tmp surefire_8-20260404023553197_34tmp"/>
+    <property name="sun.java.command" value="C:\Users\Pichau\AppData\Local\Temp\surefire15227725830230213507\surefirebooter-20260404030652378_39.jar C:\Users\Pichau\AppData\Local\Temp\surefire15227725830230213507 2026-04-04T01-25-41_009-jvmRun1 surefire-20260404030652378_37tmp surefire_9-20260404030652378_38tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\dev\learn\java\stay-hard-v1-cli\target\test-classes;C:\dev\learn\java\stay-hard-v1-cli\target\classes;C:\Users\Pichau\.m2\repository\org\postgresql\postgresql\42.7.1\postgresql-42.7.1.jar;C:\Users\Pichau\.m2\repository\org\checkerframework\checker-qual\3.41.0\checker-qual-3.41.0.jar;C:\Users\Pichau\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Pichau\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Pichau\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Pichau\.m2\repository\org\mockito\mockito-junit-jupiter\5.10.0\mockito-junit-jupiter-5.10.0.jar;C:\Users\Pichau\.m2\repository\org\mockito\mockito-core\5.10.0\mockito-core-5.10.0.jar;C:\Users\Pichau\.m2\repository\net\bytebuddy\byte-buddy\1.14.11\byte-buddy-1.14.11.jar;C:\Users\Pichau\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.11\byte-buddy-agent-1.14.11.jar;C:\Users\Pichau\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,12 +27,12 @@
     <property name="java.home" value="C:\Program Files\Java\jdk-21.0.10"/>
     <property name="file.separator" value="\"/>
     <property name="basedir" value="C:\dev\learn\java\stay-hard-v1-cli"/>
-    <property name="style.color" value="never"/>
+    <property name="style.color" value="always"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Pichau\AppData\Local\Temp\surefire8266088050328256466\surefirebooter-20260404023553197_35.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Pichau\AppData\Local\Temp\surefire15227725830230213507\surefirebooter-20260404030652378_39.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.10+8-LTS-217"/>
@@ -53,7 +53,7 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Apache\maven\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\GitHub CLI\;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\dotnet\;C:\Users\Pichau\AppData\Local\Microsoft\WindowsApps;C:\Users\Pichau\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Pichau\AppData\Roaming\npm;C:\Users\Pichau\AppData\Local\Microsoft\WinGet\Packages\cURL.cURL_Microsoft.Winget.Source_8wekyb3d8bbwe\curl-8.19.0_5-win64-mingw\bin;;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\GitHub CLI\;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\dotnet\;C:\Program Files\Apache\maven\bin;C:\Program Files\Apache\maven\bin;C:\Program Files\Apache\maven\bin;C:\mingw64\bin;C:\apache-maven-3.9.14\bin;C:\Users\Pichau\AppData\Local\Microsoft\WindowsApps;C:\Users\Pichau\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Pichau\AppData\Roaming\npm;C:\Users\Pichau\AppData\Local\Microsoft\WinGet\Packages\cURL.cURL_Microsoft.Winget.Source_8wekyb3d8bbwe\curl-8.19.0_5-win64-mingw\bin;C:\mingw64\bin;C:\apache-maven-3.9.14\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="stderr.encoding" value="Cp1252"/>
     <property name="java.vendor" value="Oracle Corporation"/>
@@ -61,7 +61,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="deveContarHabitsPorPrioridade" classname="com.stayhard.service.HabitServiceTest" time="0.827">
+  <testcase name="deveContarHabitsPorPrioridade" classname="com.stayhard.service.HabitServiceTest" time="0.878">
     <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Pichau\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.11\byte-buddy-agent-1.14.11.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
@@ -69,13 +69,13 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 ]]></system-err>
   </testcase>
   <testcase name="deveLancarExcecaoParaIndiceInvalido" classname="com.stayhard.service.HabitServiceTest" time="0.007"/>
-  <testcase name="deveIniciarHabit" classname="com.stayhard.service.HabitServiceTest" time="0.002"/>
-  <testcase name="deveSalvarAoCompletar" classname="com.stayhard.service.HabitServiceTest" time="0.018"/>
+  <testcase name="deveIniciarHabit" classname="com.stayhard.service.HabitServiceTest" time="0.003"/>
+  <testcase name="deveSalvarAoCompletar" classname="com.stayhard.service.HabitServiceTest" time="0.016"/>
   <testcase name="deveDeletarHabit" classname="com.stayhard.service.HabitServiceTest" time="0.003"/>
   <testcase name="deveAdicionarHabit" classname="com.stayhard.service.HabitServiceTest" time="0.002"/>
   <testcase name="deveContarHabitsConcluidos" classname="com.stayhard.service.HabitServiceTest" time="0.002"/>
-  <testcase name="deveResetarHabits" classname="com.stayhard.service.HabitServiceTest" time="0.001"/>
-  <testcase name="deveCompletarHabit" classname="com.stayhard.service.HabitServiceTest" time="0.002"/>
+  <testcase name="deveResetarHabits" classname="com.stayhard.service.HabitServiceTest" time="0.002"/>
+  <testcase name="deveCompletarHabit" classname="com.stayhard.service.HabitServiceTest" time="0.001"/>
   <testcase name="deveSalvarAoAdicionar" classname="com.stayhard.service.HabitServiceTest" time="0.001"/>
   <testcase name="deveFiltrarHabitsPorPrioridade" classname="com.stayhard.service.HabitServiceTest" time="0.003"/>
   <testcase name="deveFinalizarDia" classname="com.stayhard.service.HabitServiceTest" time="0.003"/>
