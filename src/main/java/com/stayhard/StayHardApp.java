@@ -5,8 +5,9 @@ import com.stayhard.controller.UserController;
 import com.stayhard.domain.observer.ConsoleObserver;
 import com.stayhard.repository.HabitRepository;
 import com.stayhard.repository.UserRepository;
-import com.stayhard.repository.csv.CsvHabitRepository;
-import com.stayhard.repository.csv.CsvUserRepository;
+import com.stayhard.repository.jdbc.JdbcConnection;
+import com.stayhard.repository.jdbc.JdbcHabitRepository;
+import com.stayhard.repository.jdbc.JdbcUserRepository;
 import com.stayhard.service.HabitService;
 import com.stayhard.service.LevelService;
 import com.stayhard.service.UserService;
@@ -15,8 +16,14 @@ import com.stayhard.ui.UserMenus;
 public class StayHardApp {
     public static void main(String[] args) {
 
-        HabitRepository habitRepository = new CsvHabitRepository("data/habits.csv");
-        UserRepository userRepository = new CsvUserRepository("data/user.csv", "Player");
+        System.out.println("========================================");
+        System.out.println("       STAY HARD SYSTEM - JDBC");
+        System.out.println("========================================\n");
+
+        JdbcConnection.initializeDatabase();
+
+        HabitRepository habitRepository = new JdbcHabitRepository();
+        UserRepository userRepository = new JdbcUserRepository();
 
         HabitService habitService = new HabitService(habitRepository);
         UserService userService = new UserService(userRepository);
