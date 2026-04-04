@@ -79,6 +79,7 @@ public class HabitService {
             habit.status(),
             habit.createdAt(),
             habit.completedAt(),
+            habit.deadline(),
             habit.streak(),
             habit.userId()
         );

@@ -23,8 +23,8 @@ public class JdbcHabitRepository implements HabitRepository {
     @Override
     public Habit save(Habit habit) {
         String sql = """
-            INSERT INTO habits (name, description, priority, status, created_at, completed_at, streak, user_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO habits (name, description, priority, status, created_at, completed_at, deadline, streak, user_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         try (Connection conn = jdbcConnection.getConnection();
@@ -36,8 +36,9 @@ public class JdbcHabitRepository implements HabitRepository {
             stmt.setString(4, habit.status().name());
             stmt.setDate(5, Date.valueOf(habit.createdAt()));
             stmt.setTimestamp(6, habit.completedAt() != null ? Timestamp.valueOf(habit.completedAt()) : null);
-            stmt.setInt(7, habit.streak());
-            stmt.setObject(8, habit.userId());
+            stmt.setTimestamp(7, Timestamp.valueOf(habit.deadline()));
+            stmt.setInt(8, habit.streak());
+            stmt.setObject(9, habit.userId());
 
             stmt.executeUpdate();
 
@@ -116,7 +117,7 @@ public class JdbcHabitRepository implements HabitRepository {
         String sql = """
             UPDATE habits
             SET name = ?, description = ?, priority = ?, status = ?,
-                completed_at = ?, streak = ?, user_id = ?
+                completed_at = ?, deadline = ?, streak = ?, user_id = ?
             WHERE id = ?
             """;
 
@@ -128,9 +129,10 @@ public class JdbcHabitRepository implements HabitRepository {
             stmt.setString(3, habit.priority().name());
             stmt.setString(4, habit.status().name());
             stmt.setTimestamp(5, habit.completedAt() != null ? Timestamp.valueOf(habit.completedAt()) : null);
-            stmt.setInt(6, habit.streak());
-            stmt.setObject(7, habit.userId());
-            stmt.setLong(8, habit.id());
+            stmt.setTimestamp(6, Timestamp.valueOf(habit.deadline()));
+            stmt.setInt(7, habit.streak());
+            stmt.setObject(8, habit.userId());
+            stmt.setLong(9, habit.id());
 
             int rows = stmt.executeUpdate();
             if (rows == 0) {
@@ -182,6 +184,7 @@ public class JdbcHabitRepository implements HabitRepository {
             Status.valueOf(rs.getString("status")),
             rs.getDate("created_at").toLocalDate(),
             rs.getTimestamp("completed_at") != null ? rs.getTimestamp("completed_at").toLocalDateTime() : null,
+            rs.getTimestamp("deadline").toLocalDateTime(),
             rs.getInt("streak"),
             rs.getObject("user_id", Long.class)
         );

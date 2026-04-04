@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS habits (
     status VARCHAR(20) NOT NULL,
     created_at DATE NOT NULL,
     completed_at TIMESTAMP,
+    deadline TIMESTAMP NOT NULL,
     streak INTEGER DEFAULT 0,
     user_id BIGINT REFERENCES users(id)
 );

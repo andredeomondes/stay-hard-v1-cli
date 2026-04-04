@@ -124,11 +124,13 @@ public class HabitMenu {
         String priorityStr = habit.priority().name();
         String streakStr = habit.streak() > 0 ? "🔥 x" + habit.streak() : "";
         String highStreak = habit.streak() >= 3 ? " ⭐" : "";
+        String deadlineStatus = habit.getDeadlineStatus();
 
-        System.out.printf("  %s [%s] %-25s %s%s%n",
+        System.out.printf("  %s [%s] %-20s %s %s%s%n",
             statusIcon,
             priorityStr.substring(0, 3).toUpperCase(),
             habit.name(),
+            deadlineStatus,
             streakStr,
             highStreak);
     }

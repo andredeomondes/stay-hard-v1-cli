@@ -58,6 +58,7 @@ public class JdbcConnection {
                 status VARCHAR(20) NOT NULL,
                 created_at DATE NOT NULL,
                 completed_at TIMESTAMP,
+                deadline TIMESTAMP NOT NULL,
                 streak INTEGER DEFAULT 0,
                 user_id BIGINT REFERENCES users(id)
             )
@@ -66,6 +67,11 @@ public class JdbcConnection {
         try (var stmt = conn.createStatement()) {
             stmt.execute(createUsersTable);
             stmt.execute(createHabitsTable);
+            try {
+                stmt.execute("ALTER TABLE habits ADD COLUMN IF NOT EXISTS deadline TIMESTAMP NOT NULL DEFAULT NOW() + INTERVAL '24 hours'");
+            } catch (SQLException e) {
+                // Column might already exist
+            }
         }
     }
 }
