@@ -76,25 +76,14 @@ public class HabitService {
     }
 
     public void resetHabits() {
-        for (Habit habit : habits) {
-            habit.reset();
-        }
+        habits.forEach(Habit::reset);
         habitRepository.save(habits);
     }
 
     public boolean allHighCompleted() {
-        boolean hasHigh = false;
-
-        for (Habit habit : habits) {
-            if (habit.getPriority() == Priority.HIGH) {
-                hasHigh = true;
-                if (habit.getStatus() != Status.DONE) {
-                    return false;
-                }
-            }
-        }
-
-        return hasHigh;
+        return habits.stream()
+                .filter(h -> h.getPriority() == Priority.HIGH)
+                .allMatch(h -> h.getStatus() == Status.DONE);
     }
 
     public long countHabitsByPriority(Priority priority) {

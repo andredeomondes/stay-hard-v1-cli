@@ -8,6 +8,7 @@ import com.stayhard.domain.utils.ConsoleVisual;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class UserMenus {
 
@@ -114,14 +115,13 @@ public class UserMenus {
 
         List<Habit> habits = habitController.listHabits();
 
-        for (int i = 0; i < habits.size(); i++) {
-            Habit h = habits.get(i);
-            System.out.printf("%d - %s [%s] [%s]%n",
-                    i + 1,
-                    h.getName(),
-                    h.getPriority(),
-                    h.getStatus());
-        }
+        IntStream.range(0, habits.size())
+                .mapToObj(i -> String.format("%d - %s [%s] [%s]",
+                        i + 1,
+                        habits.get(i).getName(),
+                        habits.get(i).getPriority(),
+                        habits.get(i).getStatus()))
+                .forEach(System.out::println);
 
         ConsoleVisual.divider();
         ConsoleVisual.info("Total de hábitos: " + habits.size());
