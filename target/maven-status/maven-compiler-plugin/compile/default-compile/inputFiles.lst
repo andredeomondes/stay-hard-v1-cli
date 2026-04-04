@@ -4,6 +4,16 @@ C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\entities\Ha
 C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\entities\User.java
 C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\enums\Priority.java
 C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\enums\Status.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\exceptions\HabitNotFoundException.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\exceptions\InvalidHabitException.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\exceptions\RepositoryException.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\observer\ConsoleObserver.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\observer\HabitEvent.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\observer\HabitObserver.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\strategy\FilterByPriority.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\strategy\FilterByStatus.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\strategy\HabitFilter.java
+C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\strategy\SortByPriority.java
 C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\domain\utils\ConsoleVisual.java
 C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\repository\csv\CsvHabitRepository.java
 C:\dev\learn\java\stay-hard-v1-cli\src\main\java\com\stayhard\repository\csv\CsvUserRepository.java

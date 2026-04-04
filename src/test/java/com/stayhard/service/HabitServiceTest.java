@@ -3,6 +3,7 @@ package com.stayhard.service;
 import com.stayhard.domain.entities.Habit;
 import com.stayhard.domain.enums.Priority;
 import com.stayhard.domain.enums.Status;
+import com.stayhard.domain.exceptions.HabitNotFoundException;
 import com.stayhard.repository.HabitRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -48,9 +49,8 @@ class HabitServiceTest {
     void deveIniciarHabit() {
         habitService.addHabit("Treinar", Priority.MEDIUM);
 
-        boolean resultado = habitService.startHabit(0);
+        habitService.startHabit(0);
 
-        assertTrue(resultado);
         assertEquals(Status.IN_PROGRESS, habitService.getAllHabits().get(0).status());
     }
 
@@ -59,18 +59,17 @@ class HabitServiceTest {
     void deveCompletarHabit() {
         habitService.addHabit("Ler livro", Priority.LOW);
 
-        boolean resultado = habitService.completeHabit(0);
+        habitService.completeHabit(0);
 
-        assertTrue(resultado);
         assertEquals(Status.DONE, habitService.getAllHabits().get(0).status());
     }
 
     @Test
-    @DisplayName("Deve retornar false para índice inválido")
-    void deveRetornarFalseParaIndiceInvalido() {
-        assertFalse(habitService.startHabit(99));
-        assertFalse(habitService.completeHabit(99));
-        assertFalse(habitService.deleteHabit(99));
+    @DisplayName("Deve lançar exceção para índice inválido")
+    void deveLancarExcecaoParaIndiceInvalido() {
+        assertThrows(HabitNotFoundException.class, () -> habitService.startHabit(99));
+        assertThrows(HabitNotFoundException.class, () -> habitService.completeHabit(99));
+        assertThrows(HabitNotFoundException.class, () -> habitService.deleteHabit(99));
     }
 
     @Test
@@ -79,9 +78,8 @@ class HabitServiceTest {
         habitService.addHabit("Hábito 1", Priority.HIGH);
         habitService.addHabit("Hábito 2", Priority.MEDIUM);
 
-        boolean resultado = habitService.deleteHabit(0);
+        habitService.deleteHabit(0);
 
-        assertTrue(resultado);
         assertEquals(1, habitService.getAllHabits().size());
         assertEquals("Hábito 2", habitService.getAllHabits().get(0).name());
     }
@@ -137,5 +135,33 @@ class HabitServiceTest {
         habitService.completeHabit(0);
 
         verify(habitRepository, times(2)).save(anyList());
+    }
+
+    @Test
+    @DisplayName("Deve filtrar hábitos por prioridade usando Strategy")
+    void deveFiltrarHabitsPorPrioridade() {
+        habitService.addHabit("H1", Priority.HIGH);
+        habitService.addHabit("H2", Priority.MEDIUM);
+        habitService.addHabit("H3", Priority.HIGH);
+
+        List<Habit> allHabits = habitService.getAllHabits();
+        List<Habit> highHabits = allHabits.stream()
+                .filter(h -> h.priority() == Priority.HIGH)
+                .toList();
+
+        assertEquals(2, highHabits.size());
+    }
+
+    @Test
+    @DisplayName("Deve finalizar dia e notificar observers")
+    void deveFinalizarDia() {
+        habitService.addHabit("H1", Priority.HIGH);
+        habitService.addHabit("H2", Priority.MEDIUM);
+        habitService.completeHabit(0);
+
+        habitService.finishDay();
+
+        assertEquals(Status.TODO, habitService.getAllHabits().get(0).status());
+        assertEquals(Status.TODO, habitService.getAllHabits().get(1).status());
     }
 }

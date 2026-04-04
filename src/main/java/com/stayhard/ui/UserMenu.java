@@ -1,7 +1,6 @@
 package com.stayhard.ui;
 
 import com.stayhard.controller.UserController;
-import com.stayhard.domain.enums.Priority;
 import com.stayhard.domain.utils.ConsoleVisual;
 
 public class UserMenu {
@@ -41,31 +40,9 @@ public class UserMenu {
         ConsoleVisual.divider();
 
         if (hasHabits) {
-            System.out.println("Hábitos concluídos hoje: " + userController.getCompletedToday());
-            System.out.println("Hábitos HIGH: " + userController.getHabitsByPriority(Priority.HIGH));
-            System.out.println("Hábitos MEDIUM: " + userController.getHabitsByPriority(Priority.MEDIUM));
-            System.out.println("Hábitos LOW: " + userController.getHabitsByPriority(Priority.LOW));
+            ConsoleVisual.info("Consulte os hábitos para ver detalhes.");
         } else {
             ConsoleVisual.info("Nenhum hábito cadastrado ainda.");
         }
-    }
-
-    public void finishDay(boolean allHighCompleted) {
-        ConsoleVisual.printHeader("Finalizar Dia");
-
-        if (!hasHabits) {
-            ConsoleVisual.alert("Crie pelo menos um hábito antes de finalizar o dia.");
-            return;
-        }
-
-        if (allHighCompleted) {
-            userController.registerCompletedDay();
-            ConsoleVisual.success("DAY COMPLETE");
-        } else {
-            userController.registerFailedDay();
-            ConsoleVisual.error("DAY FAILED");
-        }
-
-        ConsoleVisual.info("Todos os hábitos foram resetados para TODO.");
     }
 }

@@ -2,6 +2,7 @@ package com.stayhard.controller;
 
 import com.stayhard.domain.entities.Habit;
 import com.stayhard.domain.enums.Priority;
+import com.stayhard.domain.strategy.HabitFilter;
 import com.stayhard.service.HabitService;
 
 import java.util.List;
@@ -22,28 +23,40 @@ public class HabitController {
         return habitService.getAllHabits();
     }
 
+    public List<Habit> filter(HabitFilter filter) {
+        return habitService.filter(filter);
+    }
+
     public boolean hasHabits() {
         return habitService.hasHabits();
     }
 
-    public boolean startHabit(int index) {
-        return habitService.startHabit(index);
+    public Habit getHabit(int index) {
+        return habitService.getHabit(index);
     }
 
-    public boolean completeHabit(int index) {
-        return habitService.completeHabit(index);
+    public void startHabit(int index) {
+        habitService.startHabit(index);
     }
 
-    public boolean updateHabit(int index, String name, Priority priority) {
-        return habitService.updateHabit(index, name, priority);
+    public void completeHabit(int index) {
+        habitService.completeHabit(index);
     }
 
-    public boolean deleteHabit(int index) {
-        return habitService.deleteHabit(index);
+    public void updateHabit(int index, String name, Priority priority) {
+        habitService.updateHabit(index, name, priority);
+    }
+
+    public void deleteHabit(int index) {
+        habitService.deleteHabit(index);
     }
 
     public void resetHabits() {
         habitService.resetHabits();
+    }
+
+    public void finishDay() {
+        habitService.finishDay();
     }
 
     public boolean allHighCompleted() {

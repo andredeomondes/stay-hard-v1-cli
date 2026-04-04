@@ -32,10 +32,10 @@ public class UserMenus {
                 case 4 -> habitMenu.complete();
                 case 5 -> habitMenu.edit();
                 case 6 -> habitMenu.remove();
-                case 7 -> userMenu.showStatus();
-                case 8 -> {
-                    userMenu.finishDay(habitController.allHighCompleted());
-                    habitController.resetHabits();
+                case 7 -> habitMenu.filter();
+                case 8 -> userMenu.showStatus();
+                case 9 -> {
+                    habitController.finishDay();
                 }
                 case 0 -> ConsoleVisual.info("Saindo do sistema...");
                 default -> ConsoleVisual.error("Opção inválida.");
@@ -63,8 +63,9 @@ public class UserMenus {
         System.out.println("4 - Concluir hábito");
         System.out.println("5 - Editar hábito");
         System.out.println("6 - Remover hábito");
-        System.out.println("7 - Ver status");
-        System.out.println("8 - Finalizar dia");
+        System.out.println("7 - Filtrar hábitos");
+        System.out.println("8 - Ver status");
+        System.out.println("9 - Finalizar dia");
         System.out.println("0 - Sair");
 
         ConsoleVisual.divider();
