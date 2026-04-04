@@ -51,9 +51,9 @@ public class HabitMenu {
             int index = habits.indexOf(habit);
             System.out.printf("%d - %s [%s] [%s]%n",
                     index + 1,
-                    habit.getName(),
-                    habit.getPriority(),
-                    habit.getStatus());
+                    habit.name(),
+                    habit.priority(),
+                    habit.status());
         });
 
         ConsoleVisual.divider();
@@ -112,12 +112,12 @@ public class HabitMenu {
         Habit current = habitController.listHabits().get(index);
 
         if (newName.isBlank()) {
-            newName = current.getName();
+            newName = current.name();
         }
 
         var newPriority = input.readPriority();
         if (newPriority == null) {
-            newPriority = current.getPriority();
+            newPriority = current.priority();
         }
 
         if (habitController.updateHabit(index, newName, newPriority)) {

@@ -1,66 +1,49 @@
 package com.stayhard.domain.entities;
 
-public class User {
+public record User(
+        String name,
+        int daysCompleted,
+        int daysFailed,
+        int currentStreak,
+        int maxStreak
+) {
 
-    private String name;
-    private int daysCompleted;
-    private int daysFailed;
-    private int currentStreak;
-    private int maxStreak;
+    public User {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Nome não pode ser vazio");
+        }
+    }
 
     public User(String name) {
-        if (name == null || name.isBlank()) {
+        this(name, 0, 0, 0, 0);
+    }
+
+    public User withName(String newName) {
+        if (newName == null || newName.isBlank()) {
             throw new IllegalArgumentException("Nome não pode ser vazio");
         }
-
-        this.name = name;
-        this.daysCompleted = 0;
-        this.daysFailed = 0;
-        this.currentStreak = 0;
-        this.maxStreak = 0;
+        return new User(newName, daysCompleted, daysFailed, currentStreak, maxStreak);
     }
 
-    public User(String name, int daysCompleted, int daysFailed, int currentStreak, int maxStreak) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio");
-        }
-
-        this.name = name;
-        this.daysCompleted = daysCompleted;
-        this.daysFailed = daysFailed;
-        this.currentStreak = currentStreak;
-        this.maxStreak = maxStreak;
+    public User addCompletedDay() {
+        int newStreak = currentStreak + 1;
+        int newMaxStreak = Math.max(maxStreak, newStreak);
+        return new User(
+                name,
+                daysCompleted + 1,
+                daysFailed,
+                newStreak,
+                newMaxStreak
+        );
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getDaysCompleted() {
-        return daysCompleted;
-    }
-
-    public int getDaysFailed() {
-        return daysFailed;
-    }
-
-    public int getCurrentStreak() {
-        return currentStreak;
-    }
-
-    public int getMaxStreak() {
-        return maxStreak;
-    }
-
-    public void addCompletedDay() {
-        this.daysCompleted++;
-        this.currentStreak++;
-
-        this.maxStreak = Math.max(this.maxStreak, this.currentStreak);
-    }
-
-    public void addFailedDay() {
-        this.daysFailed++;
-        this.currentStreak = 0;
+    public User addFailedDay() {
+        return new User(
+                name,
+                daysCompleted,
+                daysFailed + 1,
+                0,
+                maxStreak
+        );
     }
 }

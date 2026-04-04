@@ -32,80 +32,72 @@ class UserServiceTest {
         User user = userService.getUser();
 
         assertNotNull(user);
-        assertEquals("Player", user.getName());
+        assertEquals("Player", user.name());
     }
 
     @Test
     @DisplayName("Deve registrar dia completado")
     void deveRegistrarDiaCompletado() {
-        User user = userService.getUser();
-        int antes = user.getDaysCompleted();
-
         userService.registerCompletedDay();
 
-        assertEquals(antes + 1, user.getDaysCompleted());
-        verify(userRepository, times(1)).save(user);
+        User updated = userService.getUser();
+        assertEquals(1, updated.daysCompleted());
+        verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
     @DisplayName("Deve incrementar streak ao registrar dia completado")
     void deveIncrementarStreak() {
-        User user = userService.getUser();
-
         userService.registerCompletedDay();
         userService.registerCompletedDay();
 
-        assertEquals(2, user.getCurrentStreak());
+        User updated = userService.getUser();
+        assertEquals(2, updated.currentStreak());
     }
 
     @Test
     @DisplayName("Deve atualizar maxStreak quando currentStreak aumenta")
     void deveAtualizarMaxStreak() {
-        User user = userService.getUser();
-
         userService.registerCompletedDay();
         userService.registerCompletedDay();
         userService.registerCompletedDay();
 
-        assertEquals(3, user.getMaxStreak());
-        assertEquals(3, user.getCurrentStreak());
+        User updated = userService.getUser();
+        assertEquals(3, updated.maxStreak());
+        assertEquals(3, updated.currentStreak());
     }
 
     @Test
     @DisplayName("Deve registrar dia falhou")
     void deveRegistrarDiaFalhou() {
-        User user = userService.getUser();
-        int antes = user.getDaysFailed();
-
         userService.registerFailedDay();
 
-        assertEquals(antes + 1, user.getDaysFailed());
-        verify(userRepository, times(1)).save(user);
+        User updated = userService.getUser();
+        assertEquals(1, updated.daysFailed());
+        verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
     @DisplayName("Deve zerar streak ao registrar dia falhou")
     void deveZerarStreakAoFalhar() {
-        User user = userService.getUser();
-
         userService.registerCompletedDay();
         userService.registerCompletedDay();
         userService.registerFailedDay();
 
-        assertEquals(0, user.getCurrentStreak());
+        User updated = userService.getUser();
+        assertEquals(0, updated.currentStreak());
     }
 
     @Test
     @DisplayName("Deve manter maxStreak após falhar")
     void deveManterMaxStreakAposFalhar() {
-        User user = userService.getUser();
-
         userService.registerCompletedDay();
         userService.registerCompletedDay();
         userService.registerCompletedDay();
         userService.registerFailedDay();
 
-        assertEquals(3, user.getMaxStreak());
-        assertEquals(0, user.getCurrentStreak());
+        User updated = userService.getUser();
+        assertEquals(3, updated.maxStreak());
+        assertEquals(0, updated.currentStreak());
     }
 }

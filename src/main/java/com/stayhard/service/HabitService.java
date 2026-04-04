@@ -38,7 +38,7 @@ public class HabitService {
             return false;
         }
 
-        habits.get(index).start();
+        habits.set(index, habits.get(index).start());
         habitRepository.save(habits);
         return true;
     }
@@ -48,7 +48,7 @@ public class HabitService {
             return false;
         }
 
-        habits.get(index).complete();
+        habits.set(index, habits.get(index).complete());
         habitRepository.save(habits);
         return true;
     }
@@ -58,9 +58,7 @@ public class HabitService {
             return false;
         }
 
-        Habit habit = habits.get(index);
-        habit.setName(name);
-        habit.setPriority(priority);
+        habits.set(index, new Habit(name, priority, habits.get(index).status()));
         habitRepository.save(habits);
         return true;
     }
@@ -76,25 +74,27 @@ public class HabitService {
     }
 
     public void resetHabits() {
-        habits.forEach(Habit::reset);
+        for (int i = 0; i < habits.size(); i++) {
+            habits.set(i, habits.get(i).reset());
+        }
         habitRepository.save(habits);
     }
 
     public boolean allHighCompleted() {
         return habits.stream()
-                .filter(h -> h.getPriority() == Priority.HIGH)
-                .allMatch(h -> h.getStatus() == Status.DONE);
+                .filter(h -> h.priority() == Priority.HIGH)
+                .allMatch(h -> h.status() == Status.DONE);
     }
 
     public long countHabitsByPriority(Priority priority) {
         return habits.stream()
-                .filter(h -> h.getPriority() == priority)
+                .filter(h -> h.priority() == priority)
                 .count();
     }
 
     public long countCompletedHabits() {
         return habits.stream()
-                .filter(h -> h.getStatus() == Status.DONE)
+                .filter(h -> h.status() == Status.DONE)
                 .count();
     }
 

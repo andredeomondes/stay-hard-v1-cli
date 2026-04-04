@@ -6,7 +6,7 @@ import com.stayhard.repository.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final User user;
+    private User user;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -18,12 +18,12 @@ public class UserService {
     }
 
     public void registerCompletedDay() {
-        user.addCompletedDay();
+        user = user.addCompletedDay();
         userRepository.save(user);
     }
 
     public void registerFailedDay() {
-        user.addFailedDay();
+        user = user.addFailedDay();
         userRepository.save(user);
     }
 }

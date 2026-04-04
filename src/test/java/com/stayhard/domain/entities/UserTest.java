@@ -12,11 +12,11 @@ class UserTest {
     void deveCriarUsuario() {
         User user = new User("Andre");
 
-        assertEquals("Andre", user.getName());
-        assertEquals(0, user.getDaysCompleted());
-        assertEquals(0, user.getDaysFailed());
-        assertEquals(0, user.getCurrentStreak());
-        assertEquals(0, user.getMaxStreak());
+        assertEquals("Andre", user.name());
+        assertEquals(0, user.daysCompleted());
+        assertEquals(0, user.daysFailed());
+        assertEquals(0, user.currentStreak());
+        assertEquals(0, user.maxStreak());
     }
 
     @Test
@@ -24,11 +24,11 @@ class UserTest {
     void deveCriarUsuarioCompleto() {
         User user = new User("Andre", 10, 2, 5, 20);
 
-        assertEquals("Andre", user.getName());
-        assertEquals(10, user.getDaysCompleted());
-        assertEquals(2, user.getDaysFailed());
-        assertEquals(5, user.getCurrentStreak());
-        assertEquals(20, user.getMaxStreak());
+        assertEquals("Andre", user.name());
+        assertEquals(10, user.daysCompleted());
+        assertEquals(2, user.daysFailed());
+        assertEquals(5, user.currentStreak());
+        assertEquals(20, user.maxStreak());
     }
 
     @Test
@@ -52,9 +52,9 @@ class UserTest {
     void deveAdicionarDiaCompletado() {
         User user = new User("Andre");
 
-        user.addCompletedDay();
+        User novo = user.addCompletedDay();
 
-        assertEquals(1, user.getDaysCompleted());
+        assertEquals(1, novo.daysCompleted());
     }
 
     @Test
@@ -62,11 +62,11 @@ class UserTest {
     void deveIncrementarCurrentStreak() {
         User user = new User("Andre");
 
-        user.addCompletedDay();
-        user.addCompletedDay();
-        user.addCompletedDay();
+        User u1 = user.addCompletedDay();
+        User u2 = u1.addCompletedDay();
+        User u3 = u2.addCompletedDay();
 
-        assertEquals(3, user.getCurrentStreak());
+        assertEquals(3, u3.currentStreak());
     }
 
     @Test
@@ -74,11 +74,11 @@ class UserTest {
     void deveAtualizarMaxStreak() {
         User user = new User("Andre");
 
-        user.addCompletedDay();
-        user.addCompletedDay();
-        user.addCompletedDay();
+        User u1 = user.addCompletedDay();
+        User u2 = u1.addCompletedDay();
+        User u3 = u2.addCompletedDay();
 
-        assertEquals(3, user.getMaxStreak());
+        assertEquals(3, u3.maxStreak());
     }
 
     @Test
@@ -86,9 +86,9 @@ class UserTest {
     void deveManterMaxStreak() {
         User user = new User("Andre", 0, 0, 5, 10);
 
-        user.addCompletedDay();
+        User novo = user.addCompletedDay();
 
-        assertEquals(10, user.getMaxStreak());
+        assertEquals(10, novo.maxStreak());
     }
 
     @Test
@@ -96,9 +96,9 @@ class UserTest {
     void deveAdicionarDiaFalhou() {
         User user = new User("Andre");
 
-        user.addFailedDay();
+        User novo = user.addFailedDay();
 
-        assertEquals(1, user.getDaysFailed());
+        assertEquals(1, novo.daysFailed());
     }
 
     @Test
@@ -106,11 +106,11 @@ class UserTest {
     void deveZerarCurrentStreak() {
         User user = new User("Andre");
 
-        user.addCompletedDay();
-        user.addCompletedDay();
-        user.addFailedDay();
+        User u1 = user.addCompletedDay();
+        User u2 = u1.addCompletedDay();
+        User u3 = u2.addFailedDay();
 
-        assertEquals(0, user.getCurrentStreak());
+        assertEquals(0, u3.currentStreak());
     }
 
     @Test
@@ -118,10 +118,10 @@ class UserTest {
     void deveManterMaxStreakAposFalhar() {
         User user = new User("Andre", 0, 0, 0, 10);
 
-        user.addCompletedDay();
-        user.addCompletedDay();
-        user.addFailedDay();
+        User u1 = user.addCompletedDay();
+        User u2 = u1.addCompletedDay();
+        User u3 = u2.addFailedDay();
 
-        assertEquals(10, user.getMaxStreak());
+        assertEquals(10, u3.maxStreak());
     }
 }

@@ -38,9 +38,9 @@ class HabitServiceTest {
 
         List<Habit> habits = habitService.getAllHabits();
         assertEquals(1, habits.size());
-        assertEquals("Estudar Java", habits.get(0).getName());
-        assertEquals(Priority.HIGH, habits.get(0).getPriority());
-        assertEquals(Status.TODO, habits.get(0).getStatus());
+        assertEquals("Estudar Java", habits.get(0).name());
+        assertEquals(Priority.HIGH, habits.get(0).priority());
+        assertEquals(Status.TODO, habits.get(0).status());
     }
 
     @Test
@@ -51,7 +51,7 @@ class HabitServiceTest {
         boolean resultado = habitService.startHabit(0);
 
         assertTrue(resultado);
-        assertEquals(Status.IN_PROGRESS, habitService.getAllHabits().get(0).getStatus());
+        assertEquals(Status.IN_PROGRESS, habitService.getAllHabits().get(0).status());
     }
 
     @Test
@@ -62,7 +62,7 @@ class HabitServiceTest {
         boolean resultado = habitService.completeHabit(0);
 
         assertTrue(resultado);
-        assertEquals(Status.DONE, habitService.getAllHabits().get(0).getStatus());
+        assertEquals(Status.DONE, habitService.getAllHabits().get(0).status());
     }
 
     @Test
@@ -83,7 +83,7 @@ class HabitServiceTest {
 
         assertTrue(resultado);
         assertEquals(1, habitService.getAllHabits().size());
-        assertEquals("Hábito 2", habitService.getAllHabits().get(0).getName());
+        assertEquals("Hábito 2", habitService.getAllHabits().get(0).name());
     }
 
     @Test
@@ -119,7 +119,7 @@ class HabitServiceTest {
 
         habitService.resetHabits();
 
-        assertEquals(Status.TODO, habitService.getAllHabits().get(0).getStatus());
+        assertEquals(Status.TODO, habitService.getAllHabits().get(0).status());
     }
 
     @Test

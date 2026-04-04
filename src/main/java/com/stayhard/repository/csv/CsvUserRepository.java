@@ -24,7 +24,7 @@ public class CsvUserRepository implements UserRepository {
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
-            reader.readLine(); // header
+            reader.readLine();
             String line = reader.readLine();
 
             if (line == null || line.isBlank()) {
@@ -55,11 +55,11 @@ public class CsvUserRepository implements UserRepository {
                 writer.write("name,daysCompleted,daysFailed,currentStreak,maxStreak");
                 writer.newLine();
                 writer.write(
-                        user.getName() + "," +
-                                user.getDaysCompleted() + "," +
-                                user.getDaysFailed() + "," +
-                                user.getCurrentStreak() + "," +
-                                user.getMaxStreak()
+                        user.name() + "," +
+                                user.daysCompleted() + "," +
+                                user.daysFailed() + "," +
+                                user.currentStreak() + "," +
+                                user.maxStreak()
                 );
                 writer.newLine();
             }

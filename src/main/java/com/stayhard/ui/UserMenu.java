@@ -21,7 +21,7 @@ public class UserMenu {
     }
 
     public int getCurrentStreak() {
-        return userController.getUser().getCurrentStreak();
+        return userController.getUser().currentStreak();
     }
 
     public String getLevelName() {
@@ -31,11 +31,11 @@ public class UserMenu {
     public void showStatus() {
         ConsoleVisual.printHeader("Status do Jogador");
 
-        System.out.println("Nome: " + userController.getUser().getName());
-        System.out.println("Dias completos: " + userController.getUser().getDaysCompleted());
-        System.out.println("Dias falhos: " + userController.getUser().getDaysFailed());
-        System.out.println("Streak atual: " + userController.getUser().getCurrentStreak());
-        System.out.println("Maior streak: " + userController.getUser().getMaxStreak());
+        System.out.println("Nome: " + userController.getUser().name());
+        System.out.println("Dias completos: " + userController.getUser().daysCompleted());
+        System.out.println("Dias falhos: " + userController.getUser().daysFailed());
+        System.out.println("Streak atual: " + userController.getUser().currentStreak());
+        System.out.println("Maior streak: " + userController.getUser().maxStreak());
         System.out.println("Level: " + userController.getLevelName());
 
         ConsoleVisual.divider();

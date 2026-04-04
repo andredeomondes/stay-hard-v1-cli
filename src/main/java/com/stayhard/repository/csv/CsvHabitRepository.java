@@ -28,7 +28,7 @@ public class CsvHabitRepository implements HabitRepository {
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
-            String line = reader.readLine(); // header
+            String line = reader.readLine();
 
             while ((line = reader.readLine()) != null) {
                 if (line.isBlank()) continue;
@@ -40,8 +40,7 @@ public class CsvHabitRepository implements HabitRepository {
                 Priority priority = Priority.valueOf(parts[1]);
                 Status status = Status.valueOf(parts[2]);
 
-                Habit habit = new Habit(name, priority);
-                habit.restoreStatus(status);
+                Habit habit = new Habit(name, priority, status);
                 habits.add(habit);
             }
 
@@ -62,7 +61,7 @@ public class CsvHabitRepository implements HabitRepository {
                 writer.newLine();
 
                 for (Habit habit : habits) {
-                    writer.write(habit.getName() + "," + habit.getPriority() + "," + habit.getStatus());
+                    writer.write(habit.name() + "," + habit.priority() + "," + habit.status());
                     writer.newLine();
                 }
             }

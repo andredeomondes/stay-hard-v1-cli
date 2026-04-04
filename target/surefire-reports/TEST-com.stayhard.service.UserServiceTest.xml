@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.stayhard.service.UserServiceTest" time="0.042" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.stayhard.service.UserServiceTest" time="0.044" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="BR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21.0.10\bin"/>
-    <property name="sun.java.command" value="C:\Users\Pichau\AppData\Local\Temp\surefire13823824222722149441\surefirebooter-20260404020907304_23.jar C:\Users\Pichau\AppData\Local\Temp\surefire13823824222722149441 2026-04-04T01-25-41_009-jvmRun1 surefire-20260404020907304_21tmp surefire_5-20260404020907304_22tmp"/>
+    <property name="sun.java.command" value="C:\Users\Pichau\AppData\Local\Temp\surefire1405794519211988689\surefirebooter-20260404021555012_27.jar C:\Users\Pichau\AppData\Local\Temp\surefire1405794519211988689 2026-04-04T01-25-41_009-jvmRun1 surefire-20260404021555012_25tmp surefire_6-20260404021555012_26tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\dev\learn\java\stay-hard-v1-cli\target\test-classes;C:\dev\learn\java\stay-hard-v1-cli\target\classes;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Pichau\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Pichau\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Pichau\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Pichau\.m2\repository\org\mockito\mockito-junit-jupiter\5.10.0\mockito-junit-jupiter-5.10.0.jar;C:\Users\Pichau\.m2\repository\org\mockito\mockito-core\5.10.0\mockito-core-5.10.0.jar;C:\Users\Pichau\.m2\repository\net\bytebuddy\byte-buddy\1.14.11\byte-buddy-1.14.11.jar;C:\Users\Pichau\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.11\byte-buddy-agent-1.14.11.jar;C:\Users\Pichau\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Pichau\AppData\Local\Temp\surefire13823824222722149441\surefirebooter-20260404020907304_23.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Pichau\AppData\Local\Temp\surefire1405794519211988689\surefirebooter-20260404021555012_27.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.10+8-LTS-217"/>
@@ -61,11 +61,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="deveRegistrarDiaFalhou" classname="com.stayhard.service.UserServiceTest" time="0.025"/>
+  <testcase name="deveRegistrarDiaFalhou" classname="com.stayhard.service.UserServiceTest" time="0.028"/>
   <testcase name="deveManterMaxStreakAposFalhar" classname="com.stayhard.service.UserServiceTest" time="0.002"/>
-  <testcase name="deveCarregarUsuario" classname="com.stayhard.service.UserServiceTest" time="0.001"/>
+  <testcase name="deveCarregarUsuario" classname="com.stayhard.service.UserServiceTest" time="0.003"/>
   <testcase name="deveIncrementarStreak" classname="com.stayhard.service.UserServiceTest" time="0.001"/>
   <testcase name="deveRegistrarDiaCompletado" classname="com.stayhard.service.UserServiceTest" time="0.001"/>
-  <testcase name="deveZerarStreakAoFalhar" classname="com.stayhard.service.UserServiceTest" time="0.003"/>
-  <testcase name="deveAtualizarMaxStreak" classname="com.stayhard.service.UserServiceTest" time="0.002"/>
+  <testcase name="deveZerarStreakAoFalhar" classname="com.stayhard.service.UserServiceTest" time="0.002"/>
+  <testcase name="deveAtualizarMaxStreak" classname="com.stayhard.service.UserServiceTest" time="0.003"/>
 </testsuite>

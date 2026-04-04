@@ -28,12 +28,12 @@ public class UserController {
     }
 
     public String getLevelName() {
-        return levelService.getLevelName(getUser().getDaysCompleted());
+        return levelService.getLevelName(getUser().daysCompleted());
     }
 
     public int getCurrentDay() {
         User user = getUser();
-        return user.getDaysCompleted() + user.getDaysFailed() + 1;
+        return user.daysCompleted() + user.daysFailed() + 1;
     }
 
     public long getCompletedToday() {

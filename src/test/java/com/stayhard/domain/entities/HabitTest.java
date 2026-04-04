@@ -14,9 +14,9 @@ class HabitTest {
     void deveCriarHabit() {
         Habit habit = new Habit("Estudar Java", Priority.HIGH);
 
-        assertEquals("Estudar Java", habit.getName());
-        assertEquals(Priority.HIGH, habit.getPriority());
-        assertEquals(Status.TODO, habit.getStatus());
+        assertEquals("Estudar Java", habit.name());
+        assertEquals(Priority.HIGH, habit.priority());
+        assertEquals(Status.TODO, habit.status());
     }
 
     @Test
@@ -56,9 +56,9 @@ class HabitTest {
     void deveIniciarHabit() {
         Habit habit = new Habit("Teste", Priority.LOW);
 
-        habit.start();
+        Habit novo = habit.start();
 
-        assertEquals(Status.IN_PROGRESS, habit.getStatus());
+        assertEquals(Status.IN_PROGRESS, novo.status());
     }
 
     @Test
@@ -66,31 +66,29 @@ class HabitTest {
     void deveCompletarHabit() {
         Habit habit = new Habit("Teste", Priority.LOW);
 
-        habit.complete();
+        Habit novo = habit.complete();
 
-        assertEquals(Status.DONE, habit.getStatus());
+        assertEquals(Status.DONE, novo.status());
     }
 
     @Test
     @DisplayName("Deve resetar hábito (DONE → TODO)")
     void deveResetarHabit() {
-        Habit habit = new Habit("Teste", Priority.LOW);
-        habit.complete();
+        Habit habit = new Habit("Teste", Priority.LOW).complete();
 
-        habit.reset();
+        Habit novo = habit.reset();
 
-        assertEquals(Status.TODO, habit.getStatus());
+        assertEquals(Status.TODO, novo.status());
     }
 
     @Test
     @DisplayName("Não deve iniciar hábito já completo")
     void deveNaoIniciarHabitJaCompleto() {
-        Habit habit = new Habit("Teste", Priority.LOW);
-        habit.complete();
+        Habit habit = new Habit("Teste", Priority.LOW).complete();
 
-        habit.start();
+        Habit novo = habit.start();
 
-        assertEquals(Status.DONE, habit.getStatus());
+        assertEquals(Status.DONE, novo.status());
     }
 
     @Test
@@ -98,9 +96,9 @@ class HabitTest {
     void deveAlterarNome() {
         Habit habit = new Habit("Nome Antigo", Priority.HIGH);
 
-        habit.setName("Nome Novo");
+        Habit novo = habit.withName("Nome Novo");
 
-        assertEquals("Nome Novo", habit.getName());
+        assertEquals("Nome Novo", novo.name());
     }
 
     @Test
@@ -109,7 +107,7 @@ class HabitTest {
         Habit habit = new Habit("Nome", Priority.HIGH);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            habit.setName("");
+            habit.withName("");
         });
     }
 
@@ -118,20 +116,19 @@ class HabitTest {
     void deveAlterarPrioridade() {
         Habit habit = new Habit("Nome", Priority.LOW);
 
-        habit.setPriority(Priority.HIGH);
+        Habit novo = habit.withPriority(Priority.HIGH);
 
-        assertEquals(Priority.HIGH, habit.getPriority());
+        assertEquals(Priority.HIGH, novo.priority());
     }
 
     @Test
     @DisplayName("Deve restaurar status do hábito")
     void deveRestaurarStatus() {
-        Habit habit = new Habit("Nome", Priority.HIGH);
-        habit.complete();
+        Habit habit = new Habit("Nome", Priority.HIGH).complete();
 
-        habit.restoreStatus(Status.IN_PROGRESS);
+        Habit novo = habit.withStatus(Status.IN_PROGRESS);
 
-        assertEquals(Status.IN_PROGRESS, habit.getStatus());
+        assertEquals(Status.IN_PROGRESS, novo.status());
     }
 
     @Test
@@ -140,7 +137,7 @@ class HabitTest {
         Habit habit = new Habit("Nome", Priority.HIGH);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            habit.restoreStatus(null);
+            habit.withStatus(null);
         });
     }
 }
