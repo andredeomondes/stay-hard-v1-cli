@@ -1,1 +1,4 @@
+com\stayhard\domain\entities\HabitTest.class
+com\stayhard\domain\entities\UserTest.class
+com\stayhard\service\UserServiceTest.class
 com\stayhard\service\HabitServiceTest.class
