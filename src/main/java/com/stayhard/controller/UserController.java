@@ -1,6 +1,7 @@
 package com.stayhard.controller;
 
 import com.stayhard.domain.entities.User;
+import com.stayhard.domain.enums.Priority;
 import com.stayhard.service.LevelService;
 import com.stayhard.service.UserService;
 
@@ -33,5 +34,13 @@ public class UserController {
     public int getCurrentDay() {
         User user = getUser();
         return user.getDaysCompleted() + user.getDaysFailed() + 1;
+    }
+
+    public long getCompletedToday() {
+        return 0;
+    }
+
+    public long getHabitsByPriority(Priority priority) {
+        return 0;
     }
 }
